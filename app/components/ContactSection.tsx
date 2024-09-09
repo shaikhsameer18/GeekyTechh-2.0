@@ -3,14 +3,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+interface FormData {
+  fullName: string;
+  email: string;
+  message: string;
+}
+
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
     message: "",
   });
 
-  const [status, setStatus] = useState(""); // To track the form submission status
+  const [status, setStatus] = useState<string>(""); // To track the form submission status
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,27 +25,30 @@ export default function ContactSection() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("Submitting...");
 
-    // Send form data to Formspree using the URL from .env.local
-    const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.fullName,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_URL!, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
 
-    if (response.ok) {
-      setStatus("Message sent successfully!");
-      setFormData({ fullName: "", email: "", message: "" }); // Clear form
-    } else {
+      if (response.ok) {
+        setStatus("Message sent successfully!");
+        setFormData({ fullName: "", email: "", message: "" }); // Clear form
+      } else {
+        setStatus("Something went wrong. Please try again.");
+      }
+    } catch (error) {
       setStatus("Something went wrong. Please try again.");
     }
   };
