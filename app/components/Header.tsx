@@ -22,13 +22,15 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="#" aria-label="Home">
-          <Image
-            src={Logo}
-            alt="Geeky Techh Logo"
-            width={150} 
-            height={20} 
-          />
+        <a href="#" aria-label="Home" className="flex-shrink-0">
+          <div className="relative w-[150px] h-[60px]"> 
+            <Image
+              src={Logo}
+              alt="Geeky Techh Logo"
+              layout="fill" 
+              objectFit="contain" 
+            />
+          </div>
         </a>
         <div className="flex items-center">
           <button
