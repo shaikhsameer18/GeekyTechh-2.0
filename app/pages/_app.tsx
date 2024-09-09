@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Your Website Title</title>
+        <title>GeekyTechh</title>
       </Head>
 
       {/* Load Google Analytics script */}
