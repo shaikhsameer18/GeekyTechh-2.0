@@ -45,6 +45,11 @@ const teamMembers = [
 
 export default function TeamSection() {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+  const [clickedMember, setClickedMember] = useState<number | null>(null);
+
+  const handleMemberClick = (index: number) => {
+    setClickedMember(clickedMember === index ? null : index);
+  };
 
   return (
     <section id="team" className="py-20 bg-gray-100 dark:bg-gray-800">
@@ -60,6 +65,7 @@ export default function TeamSection() {
               whileHover={{ scale: 1.05 }}
               onHoverStart={() => setHoveredMember(index)}
               onHoverEnd={() => setHoveredMember(null)}
+              onClick={() => handleMemberClick(index)}
             >
               <div className="relative">
                 <Image
@@ -69,7 +75,7 @@ export default function TeamSection() {
                   height={400}
                   className="w-full h-64 object-cover"
                 />
-                {hoveredMember === index && (
+                {(hoveredMember === index || clickedMember === index) && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

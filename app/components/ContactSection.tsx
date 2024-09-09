@@ -112,7 +112,7 @@ export default function ContactSection() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               ></textarea>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row justify-between items-center">
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.05 }}
@@ -125,7 +125,7 @@ export default function ContactSection() {
                 href="https://wa.me/917774897159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-600 dark:text-purple-400 font-semibold hover:underline"
+                className="text-purple-600 dark:text-purple-400 font-semibold hover:underline mt-4 md:mt-0"
               >
                 Let&apos;s Connect on WhatsApp
               </a>
